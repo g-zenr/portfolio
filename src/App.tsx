@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 
 const App: React.FC = () => {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-gray-100 text-gray-800">
       <Navbar />
       <Home id="home" />
       <About id="about" />

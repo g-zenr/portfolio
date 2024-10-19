@@ -157,18 +157,20 @@ const skillCategories: SkillCategory[] = [
 ];
 
 const Skills: React.FC<SkillsProps> = ({ id }) => (
-  <div id={id} className="p-12 rounded-xl shadow-xl">
-    <h2 className="text-4xl font-extrabold  mb-12 text-center tracking-wide">
+  <div id={id} className="p-12 bg-white rounded-xl shadow-xl">
+    <h2 className="text-4xl font-extrabold mb-12 text-center tracking-wide text-gray-800">
       My Skills
     </h2>
     {skillCategories.map((category) => (
       <div key={category.name} className="mb-12">
-        <h3 className="text-2xl gray-700 mb-8 text-center">{category.name}</h3>
+        <h3 className="text-2xl text-gray-800 mb-8 text-center">
+          {category.name}
+        </h3>
         <ul className="flex flex-wrap gap-8 justify-center">
           {category.skills.map(({ name, icon, color }) => (
             <li
               key={name}
-              className={`flex flex-col items-center w-32 h-32 p-6 bg-white rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl ${color}`}
+              className={`flex flex-col items-center w-32 h-32 p-6 bg-gray-100 rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-110 hover:shadow-2xl ${color}`}
             >
               <div className="text-5xl mb-4">{icon}</div>
               <span className="text-md font-semibold text-gray-700 text-center">

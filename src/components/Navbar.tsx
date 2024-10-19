@@ -2,12 +2,12 @@ import React from "react";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="flex justify-center py-6 bg-gray-900 shadow-md">
+    <nav className="flex justify-center py-6 bg-white shadow-md">
       <ul className="flex space-x-10">
         <li>
           <a
             href="#home"
-            className="text-gray-300 hover:text-blue-400 hover:underline transition"
+            className="text-gray-800 hover:text-blue-600 hover:underline transition"
           >
             Home
           </a>
@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
         <li>
           <a
             href="#about"
-            className="text-gray-300 hover:text-blue-400 hover:underline transition"
+            className="text-gray-800 hover:text-blue-600 hover:underline transition"
           >
             About
           </a>
@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
         <li>
           <a
             href="#skills"
-            className="text-gray-300 hover:text-blue-400 hover:underline transition"
+            className="text-gray-800 hover:text-blue-600 hover:underline transition"
           >
             Skills
           </a>
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
         <li>
           <a
             href="#projects"
-            className="text-gray-300 hover:text-blue-400 hover:underline transition"
+            className="text-gray-800 hover:text-blue-600 hover:underline transition"
           >
             Projects
           </a>
@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
         <li>
           <a
             href="#contact"
-            className="text-gray-300 hover:text-blue-400 hover:underline transition"
+            className="text-gray-800 hover:text-blue-600 hover:underline transition"
           >
             Contact
           </a>

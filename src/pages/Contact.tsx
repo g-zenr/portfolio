@@ -6,9 +6,9 @@ interface ContactProps {
 
 const Contact: React.FC<ContactProps> = ({ id }) => {
   return (
-    <section id={id} className="py-16 px-4 text-center">
-      <h2 className="text-3xl font-bold mb-6">Contact</h2>
-      <p className="text-lg mb-4">
+    <section id={id} className="py-16 px-4 text-center bg-gray-100">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800">Contact</h2>
+      <p className="text-lg mb-4 text-gray-600">
         Feel free to reach out to me for any inquiries or opportunities. I'm
         always open to discussing new projects or collaborations.
       </p>
@@ -16,16 +16,16 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
         <input
           type="text"
           placeholder="Your Name"
-          className="mb-4 p-2 w-full rounded-lg border border-gray-700 bg-gray-800 text-white"
+          className="mb-4 p-2 w-full rounded-lg border border-gray-300 bg-white text-gray-800"
         />
         <input
           type="email"
           placeholder="Your Email"
-          className="mb-4 p-2 w-full rounded-lg border border-gray-700 bg-gray-800 text-white"
+          className="mb-4 p-2 w-full rounded-lg border border-gray-300 bg-white text-gray-800"
         />
         <textarea
           placeholder="Your Message"
-          className="mb-4 p-2 w-full rounded-lg border border-gray-700 bg-gray-800 text-white"
+          className="mb-4 p-2 w-full rounded-lg border border-gray-300 bg-white text-gray-800"
         />
         <button
           type="submit"
