@@ -1,137 +1,275 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 const Footer: React.FC = () => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white pt-12 pb-6">
-      <div className="container mx-auto px-4">
+    <footer
+      className={`${
+        isDark ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"
+      } transition-colors duration-300`}
+    >
+      <div className="container mx-auto py-10 px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Logo and About */}
-          <div className="mb-6 md:mb-0">
-            <div className="flex items-center justify-center md:justify-start mb-4">
-              <h3 className="text-2xl font-bold">
+          {/* Column 1: Logo and Description */}
+          <div>
+            <div className="text-xl font-bold mb-4">
+              <span className="text-blue-600">Dev</span>Portfolio
+            </div>
+            <p
+              className={`${
+                isDark ? "text-gray-300" : "text-gray-600"
+              } mb-4 max-w-xs`}
+            >
+              A showcase of my web development journey and the projects I've
+              created.
+            </p>
+            <div className="flex space-x-4">
+              <a
+                href="#"
+                className={`${
+                  isDark
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-700 hover:text-gray-900"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className={`${
+                  isDark
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-700 hover:text-gray-900"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className={`${
+                  isDark
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-700 hover:text-gray-900"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className={`${
+                  isDark
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-700 hover:text-gray-900"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div>
+            <h3
+              className={`text-lg font-semibold mb-4 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Quick Links
+            </h3>
+            <ul className="space-y-2">
+              <li>
                 <a
                   href="#home"
-                  className="text-white hover:text-blue-400 transition"
+                  className={`${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  } transition-colors duration-200`}
                 >
-                  Portfolio<span className="text-blue-500">.</span>
+                  Home
                 </a>
-              </h3>
-            </div>
-            <p className="text-gray-400 text-center md:text-left">
-              A showcase of my projects, skills, and experience as a full-stack
-              developer. Built with React, TypeScript, and Tailwind CSS.
-            </p>
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  className={`${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  } transition-colors duration-200`}
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#skills"
+                  className={`${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  } transition-colors duration-200`}
+                >
+                  Skills
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#projects"
+                  className={`${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  } transition-colors duration-200`}
+                >
+                  Projects
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  className={`${
+                    isDark
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-gray-900"
+                  } transition-colors duration-200`}
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* Quick Links */}
-          <div className="mb-6 md:mb-0">
-            <h4 className="text-lg font-semibold mb-4 text-center md:text-left">
-              Quick Links
-            </h4>
-            <nav>
-              <ul className="flex flex-col gap-2 text-center md:text-left">
-                <li>
-                  <a
-                    href="#home"
-                    className="text-gray-400 hover:text-blue-400 transition"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#about"
-                    className="text-gray-400 hover:text-blue-400 transition"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#skills"
-                    className="text-gray-400 hover:text-blue-400 transition"
-                  >
-                    Skills
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#projects"
-                    className="text-gray-400 hover:text-blue-400 transition"
-                  >
-                    Projects
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#contact"
-                    className="text-gray-400 hover:text-blue-400 transition"
-                  >
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-          {/* Contact & Social */}
+          {/* Column 3: Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-center md:text-left">
-              Connect
-            </h4>
-            <div className="flex justify-center md:justify-start gap-4 mb-4">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center text-white transition-colors duration-300"
-                aria-label="GitHub"
-              >
-                <FaGithub size={20} />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center text-white transition-colors duration-300"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin size={20} />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center text-white transition-colors duration-300"
-                aria-label="Twitter"
-              >
-                <FaTwitter size={20} />
-              </a>
-              <a
-                href="mailto:contact@example.com"
-                className="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center text-white transition-colors duration-300"
-                aria-label="Email"
-              >
-                <FaEnvelope size={20} />
-              </a>
+            <h3
+              className={`text-lg font-semibold mb-4 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
+              Contact Info
+            </h3>
+            <div className="space-y-3">
+              <div className="flex items-start">
+                <svg
+                  className={`w-5 h-5 mt-0.5 mr-3 ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+                <span
+                  className={`${isDark ? "text-gray-300" : "text-gray-600"}`}
+                >
+                  contact@johndoe.dev
+                </span>
+              </div>
+              <div className="flex items-start">
+                <svg
+                  className={`w-5 h-5 mt-0.5 mr-3 ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <span
+                  className={`${isDark ? "text-gray-300" : "text-gray-600"}`}
+                >
+                  +1 (123) 456-7890
+                </span>
+              </div>
+              <div className="flex items-start">
+                <svg
+                  className={`w-5 h-5 mt-0.5 mr-3 ${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <span
+                  className={`${isDark ? "text-gray-300" : "text-gray-600"}`}
+                >
+                  San Francisco, California
+                </span>
+              </div>
             </div>
-            <p className="text-gray-400 text-center md:text-left">
-              Feel free to reach out for collaborations or just a friendly
-              hello!
-            </p>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-800 mt-8 pt-6 text-sm text-gray-400 text-center">
-          <p>&copy; {currentYear} John Doe. All rights reserved.</p>
-          <p className="mt-2">
-            Designed & Built with <span className="text-red-500">♥</span> by
-            John Doe
-          </p>
+        <div
+          className={`mt-10 pt-6 border-t ${
+            isDark
+              ? "border-gray-700 text-gray-400"
+              : "border-gray-200 text-gray-500"
+          } text-center text-sm`}
+        >
+          <p>© {currentYear} DevPortfolio. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -6,6 +6,7 @@ import {
   FaGraduationCap,
   FaBriefcase,
 } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 interface AboutProps {
   id: string;
@@ -47,15 +48,31 @@ const experiences: Experience[] = [
 ];
 
 const About: React.FC<AboutProps> = ({ id }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
   return (
-    <section id={id} className="py-20 px-4 bg-white">
+    <section
+      id={id}
+      className={`py-20 px-4 ${
+        isDark ? "bg-gray-900" : "bg-white"
+      } transition-colors duration-300`}
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800 inline-block relative">
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-3 ${
+              isDark ? "text-white" : "text-gray-800"
+            } inline-block relative`}
+          >
             About Me
             <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-2 w-24 h-1 bg-blue-600"></span>
           </h2>
-          <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+          <p
+            className={`text-xl ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            } mt-6 max-w-2xl mx-auto`}
+          >
             Here's a little background about who I am and what I do.
           </p>
         </div>
@@ -63,13 +80,27 @@ const About: React.FC<AboutProps> = ({ id }) => {
         <div className="flex flex-col md:flex-row gap-12 mb-16">
           {/* Left Column: Personal Info */}
           <div className="md:w-2/5">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div
+              className={`${isDark ? "bg-gray-800" : "bg-white"} rounded-2xl ${
+                isDark ? "shadow-blue-900/20" : "shadow-lg"
+              } overflow-hidden transition-colors duration-300`}
+            >
               {/* Profile Image */}
               <div className="h-64 bg-gradient-to-r from-blue-400 to-blue-600 relative">
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-                  <div className="w-36 h-36 rounded-full border-4 border-white overflow-hidden bg-white">
+                  <div
+                    className={`w-36 h-36 rounded-full border-4 ${
+                      isDark ? "border-gray-800" : "border-white"
+                    } overflow-hidden ${isDark ? "bg-gray-700" : "bg-white"}`}
+                  >
                     {/* Replace with your image */}
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-700">
+                    <div
+                      className={`w-full h-full ${
+                        isDark ? "bg-gray-700" : "bg-gray-200"
+                      } flex items-center justify-center ${
+                        isDark ? "text-gray-300" : "text-gray-700"
+                      }`}
+                    >
                       Your Photo
                     </div>
                   </div>
@@ -78,7 +109,11 @@ const About: React.FC<AboutProps> = ({ id }) => {
 
               {/* Profile Details */}
               <div className="pt-20 px-6 pb-8">
-                <h3 className="text-2xl font-bold text-center text-gray-800">
+                <h3
+                  className={`text-2xl font-bold text-center ${
+                    isDark ? "text-white" : "text-gray-800"
+                  }`}
+                >
                   John Doe
                 </h3>
                 <p className="text-blue-600 font-medium text-center mb-6">
@@ -86,15 +121,27 @@ const About: React.FC<AboutProps> = ({ id }) => {
                 </p>
 
                 <ul className="space-y-4">
-                  <li className="flex items-center text-gray-700">
+                  <li
+                    className={`flex items-center ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     <FaMapMarkerAlt className="text-blue-600 mr-3" />
                     <span>San Francisco, CA</span>
                   </li>
-                  <li className="flex items-center text-gray-700">
+                  <li
+                    className={`flex items-center ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     <FaCalendarAlt className="text-blue-600 mr-3" />
                     <span>Born April 12, 1997</span>
                   </li>
-                  <li className="flex items-center text-gray-700">
+                  <li
+                    className={`flex items-center ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
+                  >
                     <FaGraduationCap className="text-blue-600 mr-3" />
                     <span>B.S. in Computer Science</span>
                   </li>
@@ -116,23 +163,45 @@ const About: React.FC<AboutProps> = ({ id }) => {
 
           {/* Right Column: Bio & Experience */}
           <div className="md:w-3/5">
-            <div className="bg-white rounded-2xl p-6 mb-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+            <div
+              className={`${
+                isDark ? "bg-gray-800" : "bg-white"
+              } rounded-2xl p-6 mb-8 ${
+                isDark ? "shadow-blue-900/20" : "shadow-none"
+              } transition-colors duration-300`}
+            >
+              <h3
+                className={`text-2xl font-bold ${
+                  isDark ? "text-white" : "text-gray-800"
+                } mb-4`}
+              >
                 My Journey
               </h3>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p
+                className={`${
+                  isDark ? "text-gray-300" : "text-gray-600"
+                } mb-4 leading-relaxed`}
+              >
                 I'm a passionate full-stack developer based in San Francisco,
                 with over 3 years of professional experience building web and
                 mobile applications. I specialize in JavaScript technologies,
                 particularly React, Node.js, and TypeScript.
               </p>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p
+                className={`${
+                  isDark ? "text-gray-300" : "text-gray-600"
+                } mb-4 leading-relaxed`}
+              >
                 My journey into development began during college where I
                 discovered my passion for creating software solutions. Since
                 then, I've been consistently improving my skills and staying
                 up-to-date with emerging technologies and best practices.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p
+                className={`${
+                  isDark ? "text-gray-300" : "text-gray-600"
+                } leading-relaxed`}
+              >
                 When I'm not coding, you can find me hiking, reading about new
                 technologies, or contributing to open-source projects. I'm
                 always eager to take on new challenges and collaborate on
@@ -141,8 +210,18 @@ const About: React.FC<AboutProps> = ({ id }) => {
             </div>
 
             {/* Experience Timeline */}
-            <div className="bg-white rounded-2xl p-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+            <div
+              className={`${
+                isDark ? "bg-gray-800" : "bg-white"
+              } rounded-2xl p-6 ${
+                isDark ? "shadow-blue-900/20" : "shadow-none"
+              } transition-colors duration-300`}
+            >
+              <h3
+                className={`text-2xl font-bold ${
+                  isDark ? "text-white" : "text-gray-800"
+                } mb-6`}
+              >
                 Experience & Education
               </h3>
 
@@ -156,7 +235,11 @@ const About: React.FC<AboutProps> = ({ id }) => {
                     <div className="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-white bg-blue-600 shadow-md transform -translate-x-1/2"></div>
 
                     {/* Content */}
-                    <h4 className="text-lg font-bold text-gray-800">
+                    <h4
+                      className={`text-lg font-bold ${
+                        isDark ? "text-white" : "text-gray-800"
+                      }`}
+                    >
                       {exp.title}
                     </h4>
                     <div className="flex items-center text-blue-600 mb-2">
@@ -167,8 +250,20 @@ const About: React.FC<AboutProps> = ({ id }) => {
                       )}
                       <span>{exp.company}</span>
                     </div>
-                    <p className="text-sm text-gray-500 mb-3">{exp.period}</p>
-                    <p className="text-gray-600">{exp.description}</p>
+                    <p
+                      className={`text-sm ${
+                        isDark ? "text-gray-400" : "text-gray-500"
+                      } mb-3`}
+                    >
+                      {exp.period}
+                    </p>
+                    <p
+                      className={`${
+                        isDark ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
+                      {exp.description}
+                    </p>
                   </div>
                 ))}
               </div>

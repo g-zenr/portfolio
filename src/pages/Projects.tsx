@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 interface ProjectsProps {
   id: string;
@@ -16,6 +17,8 @@ interface Project {
 
 const Projects: React.FC<ProjectsProps> = ({ id }) => {
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const projects: Project[] = [
     {
@@ -75,14 +78,27 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
       : projects.filter((project) => project.tags.includes(activeFilter));
 
   return (
-    <section id={id} className="py-20 px-4 bg-gray-50">
+    <section
+      id={id}
+      className={`py-20 px-4 ${
+        isDark ? "bg-gray-900" : "bg-gray-50"
+      } transition-colors duration-300`}
+    >
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800 inline-block relative">
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-3 ${
+              isDark ? "text-white" : "text-gray-800"
+            } inline-block relative`}
+          >
             My Projects
             <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-2 w-24 h-1 bg-blue-600"></span>
           </h2>
-          <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+          <p
+            className={`text-xl ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            } mt-6 max-w-2xl mx-auto`}
+          >
             Here are some of my recent works. Take a look around and see what
             I've been building.
           </p>
@@ -97,6 +113,8 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 activeFilter === filter
                   ? "bg-blue-600 text-white shadow-md"
+                  : isDark
+                  ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
                   : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
             >
@@ -110,10 +128,16 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              className={`${
+                isDark ? "bg-gray-800" : "bg-white"
+              } rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2`}
             >
               {/* Project Image */}
-              <div className="h-52 bg-gray-200 overflow-hidden">
+              <div
+                className={`h-52 ${
+                  isDark ? "bg-gray-700" : "bg-gray-200"
+                } overflow-hidden`}
+              >
                 {project.image ? (
                   <img
                     src={project.image}
@@ -121,7 +145,11 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-gray-500 text-xl font-medium">
+                  <div
+                    className={`w-full h-full flex items-center justify-center ${
+                      isDark ? "text-gray-400" : "text-gray-500"
+                    } text-xl font-medium`}
+                  >
                     Project Image
                   </div>
                 )}
@@ -129,17 +157,31 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="font-bold text-xl mb-2 text-gray-800">
+                <h3
+                  className={`font-bold text-xl mb-2 ${
+                    isDark ? "text-white" : "text-gray-800"
+                  }`}
+                >
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
+                <p
+                  className={`${
+                    isDark ? "text-gray-300" : "text-gray-600"
+                  } mb-4`}
+                >
+                  {project.description}
+                </p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded"
+                      className={`px-2 py-1 ${
+                        isDark
+                          ? "bg-blue-900/30 text-blue-400"
+                          : "bg-blue-50 text-blue-600"
+                      } text-xs font-medium rounded`}
                     >
                       {tag}
                     </span>
@@ -180,7 +222,11 @@ const Projects: React.FC<ProjectsProps> = ({ id }) => {
                     href={project.codeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded hover:border-blue-600 hover:text-blue-600 transition flex items-center"
+                    className={`px-4 py-2 border text-sm font-medium rounded hover:border-blue-600 hover:text-blue-600 transition flex items-center ${
+                      isDark
+                        ? "border-gray-600 text-gray-300"
+                        : "border-gray-300 text-gray-700"
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

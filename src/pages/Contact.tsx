@@ -5,6 +5,7 @@ import {
   FaMapMarkerAlt,
   FaPaperPlane,
 } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 interface ContactProps {
   id: string;
@@ -37,6 +38,8 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null
   );
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -59,9 +62,9 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
         "Your message has been sent successfully! I'll get back to you soon."
       );
       setFormState({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
+    } catch (error: unknown) {
       setSubmitStatus("error");
-      setSubmitMessage("Oops! Something went wrong. Please try again later.");
+      setSubmitMessage(`Oops! Something went wrong: ${error instanceof Error ? error.message : 'Please try again later.'}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -88,14 +91,27 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
   ];
 
   return (
-    <section id={id} className="py-20 px-4 bg-gray-50">
+    <section
+      id={id}
+      className={`py-20 px-4 ${
+        isDark ? "bg-gray-900" : "bg-gray-50"
+      } transition-colors duration-300`}
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800 inline-block relative">
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-3 ${
+              isDark ? "text-white" : "text-gray-800"
+            } inline-block relative`}
+          >
             Get In Touch
             <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-2 w-24 h-1 bg-blue-600"></span>
           </h2>
-          <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+          <p
+            className={`text-xl ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            } mt-6 max-w-2xl mx-auto`}
+          >
             Have a question or want to work together? Feel free to contact me!
           </p>
         </div>
@@ -103,11 +119,21 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           {/* Contact Info */}
           <div className="lg:w-1/3 w-full">
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+            <div
+              className={`${
+                isDark ? "bg-gray-800" : "bg-white"
+              } rounded-xl shadow-md p-8 transition-colors duration-300`}
+            >
+              <h3
+                className={`text-2xl font-bold ${
+                  isDark ? "text-white" : "text-gray-800"
+                } mb-6`}
+              >
                 Contact Information
               </h3>
-              <p className="text-gray-600 mb-8">
+              <p
+                className={`${isDark ? "text-gray-300" : "text-gray-600"} mb-8`}
+              >
                 Feel free to reach out through any of these channels. I'm always
                 open to discussing new projects, creative ideas, or
                 opportunities.
@@ -116,11 +142,19 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
               <div className="space-y-6">
                 {contactMethods.map((method, index) => (
                   <div key={index} className="flex items-start">
-                    <div className="bg-blue-50 p-3 rounded-lg mr-4">
+                    <div
+                      className={`${
+                        isDark ? "bg-blue-900/30" : "bg-blue-50"
+                      } p-3 rounded-lg mr-4`}
+                    >
                       {method.icon}
                     </div>
                     <div>
-                      <h4 className="text-gray-800 font-medium">
+                      <h4
+                        className={`${
+                          isDark ? "text-white" : "text-gray-800"
+                        } font-medium`}
+                      >
                         {method.title}
                       </h4>
                       {method.link ? (
@@ -131,7 +165,13 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                           {method.content}
                         </a>
                       ) : (
-                        <p className="text-gray-600">{method.content}</p>
+                        <p
+                          className={`${
+                            isDark ? "text-gray-300" : "text-gray-600"
+                          }`}
+                        >
+                          {method.content}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -140,13 +180,23 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
 
               {/* Social Media Links */}
               <div className="mt-10">
-                <h4 className="text-gray-800 font-medium mb-4">
+                <h4
+                  className={`${
+                    isDark ? "text-white" : "text-gray-800"
+                  } font-medium mb-4`}
+                >
                   Connect with me
                 </h4>
                 <div className="flex gap-4">
                   <a
                     href="#"
-                    className="bg-gray-100 hover:bg-blue-50 p-3 rounded-full text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                    className={`${
+                      isDark
+                        ? "bg-gray-700 hover:bg-blue-900/50"
+                        : "bg-gray-100 hover:bg-blue-50"
+                    } p-3 rounded-full ${
+                      isDark ? "text-gray-300" : "text-gray-600"
+                    } hover:text-blue-600 transition-colors duration-300`}
                   >
                     <svg
                       stroke="currentColor"
@@ -162,7 +212,13 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                   </a>
                   <a
                     href="#"
-                    className="bg-gray-100 hover:bg-blue-50 p-3 rounded-full text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                    className={`${
+                      isDark
+                        ? "bg-gray-700 hover:bg-blue-900/50"
+                        : "bg-gray-100 hover:bg-blue-50"
+                    } p-3 rounded-full ${
+                      isDark ? "text-gray-300" : "text-gray-600"
+                    } hover:text-blue-600 transition-colors duration-300`}
                   >
                     <svg
                       stroke="currentColor"
@@ -178,7 +234,13 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                   </a>
                   <a
                     href="#"
-                    className="bg-gray-100 hover:bg-blue-50 p-3 rounded-full text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                    className={`${
+                      isDark
+                        ? "bg-gray-700 hover:bg-blue-900/50"
+                        : "bg-gray-100 hover:bg-blue-50"
+                    } p-3 rounded-full ${
+                      isDark ? "text-gray-300" : "text-gray-600"
+                    } hover:text-blue-600 transition-colors duration-300`}
                   >
                     <svg
                       stroke="currentColor"
@@ -194,7 +256,13 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                   </a>
                   <a
                     href="#"
-                    className="bg-gray-100 hover:bg-blue-50 p-3 rounded-full text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                    className={`${
+                      isDark
+                        ? "bg-gray-700 hover:bg-blue-900/50"
+                        : "bg-gray-100 hover:bg-blue-50"
+                    } p-3 rounded-full ${
+                      isDark ? "text-gray-300" : "text-gray-600"
+                    } hover:text-blue-600 transition-colors duration-300`}
                   >
                     <svg
                       stroke="currentColor"
@@ -215,8 +283,16 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
 
           {/* Contact Form */}
           <div className="lg:w-2/3 w-full">
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+            <div
+              className={`${
+                isDark ? "bg-gray-800" : "bg-white"
+              } rounded-xl shadow-md p-8 transition-colors duration-300`}
+            >
+              <h3
+                className={`text-2xl font-bold ${
+                  isDark ? "text-white" : "text-gray-800"
+                } mb-6`}
+              >
                 Send Me a Message
               </h3>
 
@@ -224,7 +300,11 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                 <div
                   className={`mb-6 p-4 rounded-lg ${
                     submitStatus === "success"
-                      ? "bg-green-50 text-green-800"
+                      ? isDark
+                        ? "bg-green-900/20 text-green-400"
+                        : "bg-green-50 text-green-800"
+                      : isDark
+                      ? "bg-red-900/20 text-red-400"
                       : "bg-red-50 text-red-800"
                   }`}
                 >
@@ -237,7 +317,9 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-gray-700 mb-1"
+                      className={`block text-sm font-medium ${
+                        isDark ? "text-gray-300" : "text-gray-700"
+                      } mb-1`}
                     >
                       Your Name
                     </label>
@@ -249,13 +331,19 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                       onChange={handleInputChange}
                       required
                       placeholder="Enter your name"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                      className={`w-full px-4 py-3 rounded-lg border ${
+                        isDark
+                          ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                          : "bg-white border-gray-300 text-gray-800"
+                      } focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors`}
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-gray-700 mb-1"
+                      className={`block text-sm font-medium ${
+                        isDark ? "text-gray-300" : "text-gray-700"
+                      } mb-1`}
                     >
                       Your Email
                     </label>
@@ -267,7 +355,11 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                       onChange={handleInputChange}
                       required
                       placeholder="Enter your email"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                      className={`w-full px-4 py-3 rounded-lg border ${
+                        isDark
+                          ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                          : "bg-white border-gray-300 text-gray-800"
+                      } focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors`}
                     />
                   </div>
                 </div>
@@ -275,7 +367,9 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className={`block text-sm font-medium ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    } mb-1`}
                   >
                     Subject
                   </label>
@@ -287,14 +381,20 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                     onChange={handleInputChange}
                     required
                     placeholder="What is this regarding?"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                    className={`w-full px-4 py-3 rounded-lg border ${
+                      isDark
+                        ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                        : "bg-white border-gray-300 text-gray-800"
+                    } focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors`}
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className={`block text-sm font-medium ${
+                      isDark ? "text-gray-300" : "text-gray-700"
+                    } mb-1`}
                   >
                     Message
                   </label>
@@ -306,7 +406,11 @@ const Contact: React.FC<ContactProps> = ({ id }) => {
                     required
                     rows={5}
                     placeholder="Your message here..."
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-none"
+                    className={`w-full px-4 py-3 rounded-lg border ${
+                      isDark
+                        ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                        : "bg-white border-gray-300 text-gray-800"
+                    } focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-none`}
                   ></textarea>
                 </div>
 

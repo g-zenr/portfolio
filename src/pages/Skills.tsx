@@ -21,6 +21,7 @@ import {
   SiAndroidstudio,
 } from "react-icons/si";
 import { TbSql } from "react-icons/tb";
+import { useTheme } from "../context/ThemeContext";
 
 interface SkillsProps {
   id: string;
@@ -169,47 +170,36 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
-const SkillLevelIndicator: React.FC<{ level: Skill["level"] }> = ({
-  level,
-}) => {
-  const levels = {
-    beginner: 1,
-    intermediate: 2,
-    advanced: 3,
-    expert: 4,
-  };
-
-  const levelValue = levels[level];
-  const maxLevels = 4;
-
-  return (
-    <div className="flex gap-0.5 mt-1">
-      {[...Array(maxLevels)].map((_, index) => (
-        <div
-          key={index}
-          className={`h-1 w-4 rounded-full ${
-            index < levelValue ? "bg-blue-600" : "bg-gray-200"
-          }`}
-        />
-      ))}
-    </div>
-  );
-};
 
 const Skills: React.FC<SkillsProps> = ({ id }) => {
   const [activeCategory, setActiveCategory] = useState<string>(
     skillCategories[0].name
   );
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   return (
-    <section id={id} className="py-20 px-4 bg-white">
+    <section
+      id={id}
+      className={`py-20 px-4 ${
+        isDark ? "bg-gray-900" : "bg-white"
+      } transition-colors duration-300`}
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-gray-800 inline-block relative">
+          <h2
+            className={`text-3xl md:text-4xl font-bold mb-3 ${
+              isDark ? "text-white" : "text-gray-800"
+            } inline-block relative`}
+          >
             My Skills
             <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 -mb-2 w-24 h-1 bg-blue-600"></span>
           </h2>
-          <p className="text-xl text-gray-600 mt-6 max-w-2xl mx-auto">
+          <p
+            className={`text-xl ${
+              isDark ? "text-gray-300" : "text-gray-600"
+            } mt-6 max-w-2xl mx-auto`}
+          >
             I've worked with a variety of technologies across the full stack
             development spectrum.
           </p>
@@ -224,6 +214,8 @@ const Skills: React.FC<SkillsProps> = ({ id }) => {
               className={`px-4 py-2 rounded-lg text-sm md:text-base font-medium transition-all duration-200 ${
                 activeCategory === category.name
                   ? "bg-blue-600 text-white shadow-md"
+                  : isDark
+                  ? "bg-gray-800 text-gray-300 hover:bg-gray-700"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -241,42 +233,77 @@ const Skills: React.FC<SkillsProps> = ({ id }) => {
                 {category.skills.map((skill) => (
                   <div
                     key={skill.name}
-                    className={`group flex flex-col items-center p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 ${skill.color}`}
+                    className={`group flex flex-col items-center p-6 ${
+                      isDark
+                        ? "bg-gray-800 border-gray-700"
+                        : "bg-white border-gray-100"
+                    } rounded-xl border shadow-sm hover:shadow-md transition-all duration-300 ${
+                      skill.color
+                    }`}
                   >
                     <div className="relative mb-4">
                       <div className="text-4xl md:text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                         {skill.icon}
                       </div>
-                      <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                      <div
+                        className={`absolute inset-0 ${
+                          isDark ? "bg-gray-700" : "bg-white"
+                        } rounded-full blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
+                      ></div>
                     </div>
-                    <span className="text-base md:text-lg font-medium text-gray-800 text-center">
+                    <span
+                      className={`text-base md:text-lg font-medium ${
+                        isDark ? "text-white" : "text-gray-800"
+                      } text-center`}
+                    >
                       {skill.name}
                     </span>
-                    <SkillLevelIndicator level={skill.level} />
+                    <SkillLevelIndicatorDark
+                      level={skill.level}
+                      isDark={isDark}
+                    />
                   </div>
                 ))}
               </div>
             </div>
           ))}
 
-        {/* Add this animation CSS */}
-        <style jsx>{`
-          @keyframes fade-in {
-            from {
-              opacity: 0;
-              transform: translateY(10px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          .animate-fade-in {
-            animation: fade-in 0.5s ease-out forwards;
-          }
-        `}</style>
+        {/* Animation is now handled by Tailwind classes */}
       </div>
     </section>
+  );
+};
+
+// Create a dark mode compatible version of the level indicator
+const SkillLevelIndicatorDark: React.FC<{
+  level: Skill["level"];
+  isDark: boolean;
+}> = ({ level, isDark }) => {
+  const levels = {
+    beginner: 1,
+    intermediate: 2,
+    advanced: 3,
+    expert: 4,
+  };
+
+  const levelValue = levels[level];
+  const maxLevels = 4;
+
+  return (
+    <div className="flex gap-0.5 mt-1">
+      {[...Array(maxLevels)].map((_, index) => (
+        <div
+          key={index}
+          className={`h-1 w-4 rounded-full ${
+            index < levelValue
+              ? "bg-blue-600"
+              : isDark
+              ? "bg-gray-700"
+              : "bg-gray-200"
+          }`}
+        />
+      ))}
+    </div>
   );
 };
 
